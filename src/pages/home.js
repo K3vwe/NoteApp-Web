@@ -1,8 +1,9 @@
 import React from 'react';
-import Button from '../components/Button';
 
 // import the required libraries to query server
 import { useQuery, gql } from '@apollo/client';
+
+import NoteFeed from '../components/NoteFeed';
 
 // GraphQL query stored as a variable
 const GET_NOTES = gql`
@@ -38,8 +39,7 @@ function Home() {
 
     return (
         <div>
-            {console.log(data)}
-            <h4>Data Loaded</h4>
+            <NoteFeed notes={data.noteFeed.notes} />
         </div>
     );
 }
