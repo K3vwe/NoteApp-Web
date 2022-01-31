@@ -4,6 +4,7 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import NoteFeed from '../components/NoteFeed';
+import Button from '../components/Button';
 
 // GraphQL query stored as a variable
 const GET_NOTES = gql`
@@ -29,7 +30,7 @@ const GET_NOTES = gql`
 function Home() {
 
     // QueryHook
-    const { loading, error, data } = useQuery(GET_NOTES);
+    const { loading, error, data, fetchMore } = useQuery(GET_NOTES);
 
     // if data is loading, return a loading message
     if(loading) return <h4>Data Loading...</h4>
@@ -40,6 +41,30 @@ function Home() {
     return (
         <div>
             <NoteFeed notes={data.noteFeed.notes} />
+            {/* only display the load more button if hasNextPage is true */}
+            {data.noteFeed.hasNextPage && (
+                <Button
+                    onClick={ () => fetchMore({
+                        variables: {
+                            cursor: data.noteFeed.cursor
+                        },
+                        updateQuery: (previousResult, { fetchMoreResult }) => {
+                            return {
+                                noteFeed:{
+                                    cursor: fetchMoreResult.noteFeed.cursor,
+                                    hasNextPage: fetchMoreResult.noteFeed.hasNextPage,
+                                    // combine the new and the old result
+                                    notes: [
+                                        ...previousResult.noteFeed.notes,
+                                        ...fetchMoreResult.noteFeed.notes
+                                    ],
+                                __typename: 'noteFeed'
+                                }
+                            };
+                        }
+                    })}
+                >Load More</Button>
+            )}
         </div>
     );
 }
