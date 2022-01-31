@@ -6,10 +6,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import shared layout component
 import Layout from '../components/Layout';
 
-// Get all components/import routes
+// import routes
 import Home from './home';
 import MyNotes from './mynotes';
 import Favorites from './favorites';
+import NotePage from './note';
 
 const Pages = () => {
 
@@ -21,6 +22,14 @@ const Pages = () => {
                 <Route exact path="/" element={<Home />} />
                 <Route path="/mynotes" element={<MyNotes />} />
                 <Route path="/favorites" element={<Favorites />} />
+                <Route path="note/:id" element={<NotePage />} />
+                <Route
+                    path="*"
+                    element={
+                    <main style={{ padding: "1rem" }}>
+                        <p>There's nothing here!</p>
+                    </main>
+                } />
             </Routes>
             </Layout>
         </Router>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Note from './Note';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const NoteWrapper = styled.div`
     max-width: 800px;
@@ -12,13 +13,14 @@ const NoteWrapper = styled.div`
 
 function NoteFeed({ notes }){
     return(
-        <NoteWrapper>
+        <div>
             {notes.map( note => (
-                <div key={note.id}>
+                <NoteWrapper key={note.id}>
                     <Note note={note} />
-                </div>
+                    <Link to={`note/${note.id}`}>Permalink</Link>
+                </NoteWrapper>
             ))}
-        </NoteWrapper>
+        </div>
     );
 }
 
