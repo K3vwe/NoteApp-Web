@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useApolloClient, gql } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/Button';
 
@@ -27,7 +28,7 @@ const SIGNUP_USER = gql`
     }
 `;
 
-function SignUp(){
+function SignUp(props){
 
     useEffect( () => {
         // Change the title of the page
@@ -45,13 +46,18 @@ function SignUp(){
         });
     }
 
+    const navigate = useNavigate();
+
     // Mutation Hook
     const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
         onCompleted: data => {
             // store the returned JWT in localStorage
             localStorage.setItem('token', data.signUp);
+
+            // Redirect user to HomePage after signUp process completes
+            navigate("/");
         }
-    })
+    });
 
     return(
         <Wrapper>
