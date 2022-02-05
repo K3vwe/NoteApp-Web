@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useApolloClient, gql } from '@apollo/client';
+import { isLoggedInVar } from '../cache';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/Button';
@@ -53,7 +54,8 @@ function SignUp(props){
         onCompleted: data => {
             // store the returned JWT in localStorage
             localStorage.setItem('token', data.signUp);
-
+            // Write to the cache to store isLoggedIn as true
+            isLoggedInVar(true);
             // Redirect user to HomePage after signUp process completes
             navigate("/");
         }

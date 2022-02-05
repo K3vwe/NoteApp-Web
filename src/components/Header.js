@@ -1,6 +1,16 @@
 import React from 'react';
+import { useQuery, gql } from '@apollo/client';
+import { Link } from 'react-router-dom';
+
 import logo from '../img/logo.svg';
 import styled from 'styled-components';
+
+// query the cache for isLoggedIn data without making a network request
+const IS_LOGGED_IN = gql`
+    query {
+        isLoggedIn @client
+    }
+`;
 
 const HeaderBar = styled.header`
     display: flex;
@@ -20,14 +30,29 @@ const LogoText = styled.h1`
     padding: 0;
 `;
 
+const UserState = styled.div`
+    margin-left: auto;
+`;
+
 function Header() {
+    const { data } = useQuery(IS_LOGGED_IN);
+
     return(
-        <div>
-            <HeaderBar>
-                <img src={logo} alt="Note App Logo" height="40"/>
-                <LogoText>Notedly</LogoText>
-            </HeaderBar>
-        </div>
+        <HeaderBar>
+            <img src={logo} alt="Note App Logo" height="40"/>
+            <LogoText>Notedly</LogoText>
+            <UserState>
+                {/* Display Logout option is signedin else show signin and signout options */}
+                {data.isLoggedIn ? (
+                    <p>Log out</p>
+                ) : (
+                    <p>
+                        <Link to={'./signin'}>Sign In</Link> or{' '}
+                        <Link to={'./signup'}>Sign Up</Link>
+                    </p>
+                )}
+            </UserState>
+        </HeaderBar>
     );
 };
 
