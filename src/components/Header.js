@@ -1,9 +1,11 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, useNavigate } from 'react-router-dom';
+import { isLoggedInVar } from '../cache';
 
 import logo from '../img/logo.svg';
 import styled from 'styled-components';
+import ButtonAsLink from './ButtonAsLink';
 
 // query the cache for isLoggedIn data without making a network request
 const IS_LOGGED_IN = gql`
@@ -35,7 +37,10 @@ const UserState = styled.div`
 `;
 
 function Header() {
+
+    // query isLoggedIn from local cache
     const { data } = useQuery(IS_LOGGED_IN);
+    const navigate = useNavigate();
 
     return(
         <HeaderBar>
@@ -44,7 +49,16 @@ function Header() {
             <UserState>
                 {/* Display Logout option is signedin else show signin and signout options */}
                 {data.isLoggedIn ? (
-                    <p>Log out</p>
+                    <ButtonAsLink onClick={ () => {
+                        // remove token from localStorage
+                        localStorage.removeItem('token');
+                        // set isLoggedInVar to false
+                        isLoggedInVar(false);
+                        // redirect to home page
+                        navigate("/");
+                    }}>
+                        Log Out
+                    </ButtonAsLink>
                 ) : (
                     <p>
                         <Link to={'./signin'}>Sign In</Link> or{' '}
