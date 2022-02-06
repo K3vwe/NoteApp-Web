@@ -12,6 +12,7 @@ import MyNotes from './mynotes';
 import Favorites from './favorites';
 import NotePage from './note';
 import SignUp from './signUp';
+import SignIn from './signIn';
 
 const Pages = () => {
 
@@ -25,6 +26,7 @@ const Pages = () => {
                 <Route path="/favorites" element={<Favorites />} />
                 <Route path="note/:id" element={<NotePage />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path="/signin" element={<SignIn />} />
                 <Route
                     path="*"
                     element={
