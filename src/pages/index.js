@@ -1,7 +1,8 @@
 // Manages routing pages individual components
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // import shared layout component
 import Layout from '../components/Layout';
@@ -13,6 +14,7 @@ import Favorites from './favorites';
 import NotePage from './note';
 import SignUp from './signUp';
 import SignIn from './signIn';
+import ProtectedRoute from './privateRoute';
 
 const Pages = () => {
 
@@ -22,8 +24,10 @@ const Pages = () => {
             <Layout>
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route path="/mynotes" element={<MyNotes />} />
-                <Route path="/favorites" element={<Favorites />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/mynotes" element={<MyNotes />} />
+                    <Route path="/favorites" element={<Favorites />} />
+                </Route>
                 <Route path="note/:id" element={<NotePage />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signin" element={<SignIn />} />
