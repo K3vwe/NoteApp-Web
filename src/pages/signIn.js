@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useNavigate } from 'react-router';
 import UserForm from '../components/UserForm';
+import { isLoggedInVar } from '../cache';
 
 const SIGNIN_USER = gql`
-    mutation($email: String, $password: String!) {
-        signIn(email: $email, password: $password)
+    mutation($username: String, $password: String!) {
+        signIn(username: $username, password: $password)
     }
 `;
 
@@ -21,7 +22,7 @@ function SignIn() {
     const [signIn, { loading, error }] = useMutation(SIGNIN_USER, {
         onCompleted: data => {
             // store the returned JWT in localStorage
-            localStorage.setItem('token', data.signIp);
+            localStorage.setItem('token', data.signIn);
             // Write to the cache to store isLoggedIn as true
             isLoggedInVar(true);
             // Redirect user to HomePage after signUp process completes

@@ -24,7 +24,7 @@ const Pages = () => {
             <Layout>
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route element={<ProtectedRoute />}>
+                <Route element={<ProtectedRoute />} >
                     <Route path="/mynotes" element={<MyNotes />} />
                     <Route path="/favorites" element={<Favorites />} />
                 </Route>
