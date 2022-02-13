@@ -1,18 +1,12 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
-import { Link, withRouter, useNavigate } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { Link, useNavigate } from 'react-router-dom';
 import { isLoggedInVar } from '../cache';
 
 import logo from '../img/logo.svg';
 import styled from 'styled-components';
 import ButtonAsLink from './ButtonAsLink';
-
-// query the cache for isLoggedIn data without making a network request
-const IS_LOGGED_IN = gql`
-    query {
-        isLoggedIn @client
-    }
-`;
+import { IS_LOGGED_IN } from '../gql/query';
 
 const HeaderBar = styled.header`
     display: flex;

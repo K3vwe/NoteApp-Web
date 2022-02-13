@@ -1,31 +1,11 @@
 import React from 'react';
 
 // import the required libraries to query server
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import NoteFeed from '../components/NoteFeed';
 import Button from '../components/Button';
-
-// GraphQL query stored as a variable
-const GET_NOTES = gql`
-    query($cursor: String) {
-        noteFeed(cursor: $cursor) {
-            notes {
-                id
-                createdAt
-                content
-                favoriteCount
-                author {
-                id
-                email
-                username
-                }
-            }
-            hasNextPage
-            cursor
-        }
-    }
-`;
+import { GET_NOTES } from '../gql/query';
 
 function Home() {
 

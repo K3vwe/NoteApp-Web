@@ -1,12 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import {useQuery, gql } from '@apollo/client';
-
-// query to check if a user is currently logged in
-const IS_LOGGED_IN = gql`
-    query {
-        isLoggedIn @client
-    }
-`;
+import { IS_LOGGED_IN } from '../gql/query';
 
 
 const ProtectedRoute = () => {
