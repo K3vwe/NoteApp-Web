@@ -15,6 +15,7 @@ import NotePage from './note';
 import SignUp from './signUp';
 import SignIn from './signIn';
 import ProtectedRoute from './privateRoute';
+import NewNote from './newNote';
 
 const Pages = () => {
 
@@ -27,6 +28,7 @@ const Pages = () => {
                 <Route element={<ProtectedRoute />} >
                     <Route path="/mynotes" element={<MyNotes />} />
                     <Route path="/favorites" element={<Favorites />} />
+                    <Route path="/newnote" element={<NewNote /> } />
                 </Route>
                 <Route path="note/:id" element={<NotePage />} />
                 <Route path="/signup" element={<SignUp />} />

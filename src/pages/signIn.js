@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useMutation, gql } from '@apollo/client';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 import { isLoggedInVar } from '../cache';
 
