@@ -48,6 +48,7 @@ function Navigation () {
                 <li> <Link to="/">Home</Link> </li>
                 <li> <Link to="/mynotes">MyNotes</Link> </li>
                 <li> <Link to="/favorites"><span aria-hidden="true" role="img">{'\u2B50'}</span>Favorites</Link> </li>
+                <li> <Link to="/newnote">New Note</Link> </li>
             </NavLink>
         </Nav>
     );
