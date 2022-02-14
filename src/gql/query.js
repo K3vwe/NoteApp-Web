@@ -44,4 +44,42 @@ const GET_NOTE = gql`
     }
 `;
 
-export { IS_LOGGED_IN, GET_NOTES, GET_NOTE };
+const GET_MY_NOTES = gql`
+    query me {
+        me {
+            id
+            username
+            notes {
+                id
+                content
+                createdAt
+                favoriteCount
+                author {
+                    id
+                    username
+                }
+            }
+        }
+    }
+`;
+
+const GET_MY_FAVORITES = gql`
+query me {
+    me {
+      id
+      username
+      favorites {
+        id
+        createdAt
+        content
+        favoriteCount
+        author {
+          id
+          username
+        }
+      }
+    }
+  }
+`;
+
+export { IS_LOGGED_IN, GET_NOTES, GET_NOTE, GET_MY_NOTES, GET_MY_FAVORITES };
