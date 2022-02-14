@@ -10,12 +10,12 @@ function MyNotes() {
         document.title = 'MyNotes - Note App'
     });
 
-    const { loading, error, data }  = useQuery(GET_MY_NOTES);
+    const { data, loading, error }  = useQuery(GET_MY_NOTES);
     
     // if data is loading, display a loading message
-    if(loading) <p>Loading User Notes</p>
-    // if error occurs while loading notes
-    if(error) <p>Error loading user notes</p>
+    if(loading) return 'Loading...';
+    // if error occurs while loading favorite notes
+    if(error) return `Error ${error.message}`;
 
     // if query is sucessful and there are notes, return the feed of notes
     // else if query is successful, and there aren't notes, display a message

@@ -45,22 +45,22 @@ const GET_NOTE = gql`
 `;
 
 const GET_MY_NOTES = gql`
-    query me {
-        me {
-            id
-            username
-            notes {
-                id
-                content
-                createdAt
-                favoriteCount
-                author {
-                    id
-                    username
-                }
-            }
-        }
+query me {
+    me {
+      id
+      username
+      notes {
+         id
+         content
+         createdAt
+         favoriteCount
+         author {
+           id
+           username
+         }
+      }
     }
+  }
 `;
 
 const GET_MY_FAVORITES = gql`

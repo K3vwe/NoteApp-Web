@@ -16,6 +16,7 @@ function Favorites() {
     if(loading) return 'Loading...';
     // if error occurs while loading favorite notes
     if(error) return `Error ${error.message}`;
+
     // if query is sucessful and there are favorite notes, return the feed of notes
     // else if query is successful, and there aren't notes, display a message
     if(data.me.favorites.length !== 0) {
