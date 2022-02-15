@@ -82,4 +82,16 @@ query me {
   }
 `;
 
-export { IS_LOGGED_IN, GET_NOTES, GET_NOTE, GET_MY_NOTES, GET_MY_FAVORITES };
+// Get the current user details
+const GET_ME = gql`
+query me {
+    me {
+      id
+      favorites {
+        id
+      }
+    }
+  }
+`;
+
+export { IS_LOGGED_IN, GET_NOTES, GET_NOTE, GET_MY_NOTES, GET_MY_FAVORITES, GET_ME };
