@@ -2,8 +2,30 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
+import { GET_ME } from '../gql/query';
+import DeleteNote from './DeleteNote';
+
 const NoteUser = props => {
-    return <Link to={`/edit/${props.note.id}`}>Edit</Link>
+
+    const {loading, error, data } = useQuery(GET_ME);
+
+    // if the data is loading, display a loading page
+    if(loading) return <p>Loading .....</p>
+    // if an error is encountered, display the error message
+    if(error) return <p>Error...</p>
+
+    return(
+        <React.Fragment>
+            Favorites: {props.note.favoriteCount}
+            <br />
+            {data.me.id === props.note.author.id && (
+                <React.Fragment>
+                    <Link to={`/edit/${props.note.id}`}>Edit</Link><br />
+                    <DeleteNote noteId={props.note.id} />
+                </React.Fragment>
+            )}
+        </React.Fragment>
+    );
 }
 
 export default NoteUser;

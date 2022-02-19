@@ -52,7 +52,8 @@ function Note({ note }) {
                     <UserAction>
                         <h4>Favorites: {note.favoriteCount}</h4> 
                     </UserAction>
-                ) }
+                )}
+                
                 <ReactMarkdown children={note.content} />
             </MetaData>
         </StyledNote>
