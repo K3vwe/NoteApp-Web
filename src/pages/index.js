@@ -30,9 +30,9 @@ const Pages = () => {
                     <Route path="/mynotes" element={<MyNotes />} />
                     <Route path="/favorites" element={<Favorites />} />
                     <Route path="/newnote" element={<NewNote /> } />
-                    <Route path="/edit/:id" element={<EditNote /> } />
+                    <Route path="edit/:id" element={<EditNote /> } />
                 </Route>
-                <Route path="note/:id" element={<NotePage />} />
+                <Route path="/note/:id" element={<NotePage />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route
