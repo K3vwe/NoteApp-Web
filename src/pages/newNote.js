@@ -5,26 +5,7 @@ import { useNavigate } from 'react-router';
 // import NoteForm Component
 import NoteForm from '../components/NoteForm';
 import { GET_NOTES, GET_MY_NOTES } from '../gql/query';
-
-// mutation command to create a new note
-const NEW_NOTE = gql`
-    mutation($content: String!) {
-        newNote(content: $content) {
-            id
-            content
-            createdAt
-            favoriteCount
-            favoritedBy {
-                id
-                username
-            }
-            author {
-                id
-                username
-            }
-        }
-    }
-`;
+import { NEW_NOTE } from '../gql/mutation';
 
 const NewNote = () => {
 
@@ -39,7 +20,7 @@ const NewNote = () => {
         refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
         onCompleted: data => {
             // when complete, redirect user to the user created notepage.
-            navigate(`note/${data.newNote.id}`);
+            navigate(`/note/${data.newNote.id}`);
         }
     })
 

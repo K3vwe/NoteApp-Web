@@ -4,12 +4,7 @@ import { isLoggedInVar } from '../cache';
 import { useNavigate } from 'react-router-dom';
 
 import UserForm from '../components/UserForm';
-
-const SIGNUP_USER = gql`
-    mutation($email: String!, $username: String!, $password: String!) {
-        signUp(email: $email, username: $username, password: $password)
-    }
-`;
+import { SIGNUP_USER } from '../gql/mutation';
 
 function SignUp(){
 

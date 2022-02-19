@@ -4,12 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ButtonAsLink from './ButtonAsLink';
 import { GET_MY_NOTES, GET_NOTES }  from '../gql/query';
-
-const DELETE_NOTE = gql`
-    mutation deleteNote($id: ID!){
-        deleteNote(id: $id)
-    }
-`;
+import { DELETE_NOTE } from '../gql/mutation';
 
 const DeleteNote = props => {
 
