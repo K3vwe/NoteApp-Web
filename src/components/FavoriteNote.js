@@ -6,7 +6,14 @@ import { TOGGLE_FAVORITE } from '../gql/mutation';
 import { GET_MY_FAVORITES } from '../gql/query';
 
 const FavoriteNote = props => {
-        // toggleFavorites mutation hook
+    // store the note's favorite as a state
+    const [count, setCount] = useState(props.favoriteCount);
+
+    // store if the user has favorited the note as state
+    const [favorited, setFavorited] = useState(
+        // Check if the note exists in the user favorite list
+        props.me.favorites.filter( note => note.id === props.noteId).length>0
+    )
     const [toggleFavorite] = useMutation(TOGGLE_FAVORITE, {
         variables: {
             id: props.noteId
@@ -21,6 +28,8 @@ const FavoriteNote = props => {
                 <ButtonAsLink
                 onClick={ () => {
                     toggleFavorite();
+                    setFavorited(false);
+                    setCount(count-1);
                 }}>
                     Remove favorite
                 </ButtonAsLink>
@@ -28,10 +37,12 @@ const FavoriteNote = props => {
                 <ButtonAsLink
                 onClick={ () => {
                     toggleFavorite()
+                    setFavorited(true);
+                    setCount(count+1);
                 }}>
                     Add favorite
                 </ButtonAsLink>
-            )} : {props.favoriteCount}
+            )} : {count}
         </React.Fragment>
     );
 }
