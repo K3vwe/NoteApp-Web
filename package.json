@@ -23,9 +23,7 @@
   "scripts": {
     "dev": "parcel public/index.html",
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "deploy": "parcel build public/index.html --public-url ./"
   },
   "eslintConfig": {
     "extends": [
